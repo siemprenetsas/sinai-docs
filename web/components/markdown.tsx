@@ -5,6 +5,7 @@ import { toJsxRuntime } from 'hast-util-to-jsx-runtime';
 import {
   Children,
   type ComponentProps,
+  createContext,
   type ReactElement,
   type ReactNode,
   Suspense,
@@ -80,10 +81,19 @@ function createProcessor(): Processor {
   };
 }
 
+/**
+ * Destino de los enlaces del chat. En el chat embebido (iframe) es '_blank'
+ * para que las guías se abran en una pestaña nueva y no reemplacen el chat.
+ */
+export const ChatLinkTargetContext = createContext<string | undefined>(undefined);
+
 function ChatLink({ href, onClick, ...props }: ComponentProps<'a'>) {
+  const target = use(ChatLinkTargetContext);
+
   return (
     <a
       href={href}
+      {...(target && { target, rel: 'noopener noreferrer' })}
       {...props}
       onClick={(event) => {
         onClick?.(event);

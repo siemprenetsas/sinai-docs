@@ -43,8 +43,9 @@ const Context = createContext<{
 export function AISearchPanelHeader({
   className,
   nativeControlId,
+  onClose,
   ...props
-}: ComponentProps<'div'> & { nativeControlId?: string }) {
+}: ComponentProps<'div'> & { nativeControlId?: string; onClose?: () => void }) {
   const { setOpen } = useAISearchContext();
 
   return (
@@ -87,7 +88,7 @@ export function AISearchPanelHeader({
               className: 'text-fd-muted-foreground rounded-full',
             }),
           )}
-          onClick={() => setOpen(false)}
+          onClick={() => (onClose ? onClose() : setOpen(false))}
         >
           <X />
         </button>
@@ -138,7 +139,13 @@ export function AISearchInputActions() {
 }
 
 const StorageKeyInput = '__ai_search_input';
-export function AISearchInput(props: ComponentProps<'form'>) {
+export function AISearchInput({
+  contextLocation,
+  ...props
+}: ComponentProps<'form'> & {
+  /** Ubicación que se envía como contexto en lugar de location.href (p. ej. desde el chat embebido). */
+  contextLocation?: string;
+}) {
   const { status, sendMessage, stop } = useChatContext();
   const [input, setInput] = useState(() => (
     typeof window === 'undefined' ? '' : window.localStorage.getItem(StorageKeyInput) ?? ''
@@ -156,7 +163,7 @@ export function AISearchInput(props: ComponentProps<'form'>) {
         {
           type: 'data-client',
           data: {
-            location: location.href,
+            location: contextLocation ?? location.href,
           },
         },
         {
@@ -521,6 +528,42 @@ export function AISearchPanel({ nativeControlId }: { nativeControlId?: string })
         </div>
       )}
     </>
+  );
+}
+
+/**
+ * Panel del asistente a pantalla completa, pensado para mostrarse dentro de un
+ * iframe en otras aplicaciones de SINAI. Al cerrar avisa a la ventana padre con
+ * postMessage({ type: 'sinai-chat:close' }) para que oculte el iframe.
+ */
+function closeEmbedInParent() {
+  if (window.parent !== window) {
+    window.parent.postMessage({ type: 'sinai-chat:close' }, '*');
+  }
+}
+
+export function AISearchEmbedPanel({ contextLocation }: { contextLocation?: string }) {
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') closeEmbedInParent();
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, []);
+
+  return (
+    <div className="fixed inset-0 bg-fd-card text-fd-card-foreground">
+      <div className="flex flex-col size-full p-2 lg:p-3">
+        <AISearchPanelHeader onClose={closeEmbedInParent} />
+        <AISearchPanelList className="flex-1" />
+        <div className="rounded-xl border bg-fd-secondary text-fd-secondary-foreground shadow-sm has-focus-visible:shadow-md">
+          <AISearchInput contextLocation={contextLocation} />
+          <div className="flex items-center gap-1.5 p-1 empty:hidden">
+            <AISearchInputActions />
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
 

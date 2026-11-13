@@ -8,12 +8,15 @@ import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/cn';
 
 export function SinaiAssistant({ children }: { children: ReactNode }) {
-  const isHome = usePathname() === '/';
+  const pathname = usePathname();
+  const isHome = pathname === '/';
+  // El chat embebido (/embed/chat) dibuja su propio panel a pantalla completa.
+  const isEmbed = pathname.startsWith('/embed');
 
   return (
     <AISearch>
       {children}
-      {!isHome && (
+      {!isHome && !isEmbed && (
         <>
           <AISearchPanel />
           <AISearchTrigger

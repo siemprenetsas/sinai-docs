@@ -28,6 +28,22 @@ const nextConfig: NextConfig = {
       { protocol: 'https', hostname: 'thumbnails.odycdn.com' },
     ],
   },
+  async headers() {
+    // Solo estos orígenes pueden incrustar el chat (/embed/*) en un iframe.
+    // Se puede sobrescribir con EMBED_FRAME_ANCESTORS (lista separada por espacios).
+    const frameAncestors =
+      process.env.EMBED_FRAME_ANCESTORS
+      ?? "'self' https://sinai.net.co https://*.sinai.net.co https://*.siempre.net.co";
+
+    return [
+      {
+        source: '/embed/:path*',
+        headers: [
+          { key: 'Content-Security-Policy', value: `frame-ancestors ${frameAncestors}` },
+        ],
+      },
+    ];
+  },
   async redirects() {
     return [...administrativoRedirects, ...docenteRedirects, ...estudianteRedirects];
   },
