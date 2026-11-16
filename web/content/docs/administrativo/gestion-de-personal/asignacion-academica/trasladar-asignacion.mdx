@@ -1,0 +1,191 @@
+---
+title: "Trasladar asignación"
+description: "Pase a otro docente activo las asignaturas, estándar o por periodo, y las direcciones de grupo que elija del docente que sale, sin crear su carga desde cero."
+guide: true
+wordpressId: 29313
+legacyUrl: "https://ayudasinai.siempre.net.co/docs/trasladar-asignacion/"
+lastModified: "2026-11-16"
+lastReviewed: "2026-11-16"
+---
+
+## Video tutorial
+
+<GuideCallout type="warning">
+  **Video desactualizado.** Este video muestra una versión anterior de la pantalla, con los paneles **Origen** y **Destino** y el botón **Trasladar►**. La pantalla actual es diferente y también traslada la asignación personalizada. Siga la guía paso a paso, que describe la versión vigente.
+</GuideCallout>
+
+<GuideVideos compact>
+<YouTube id="MS7AxdULekI" title="Trasladar Asignación" odyseeUrl="https://odysee.com/@AndresGoDu:a/Trasladar-Asignaci%C3%B3n-Academica---Ed:9bc83fe2c8f049a25904250ba901e6987bd81513" />
+</GuideVideos>
+
+<GuideVideoPending>
+  - Trasladar la asignación estándar, la asignación por periodo y las direcciones de grupo con la pantalla actual. Falta el identificador de YouTube y, si existe, la URL de Odysee.
+</GuideVideoPending>
+
+## Guía paso a paso
+
+### 1. ¿Qué es Trasladar asignación?
+
+**Trasladar asignación** pasa la carga académica y las direcciones de grupo de un docente que sale a otro docente. Se usa cuando la institución reemplaza a un docente por traslado, permuta, licencia o retiro, o cuando reparte parte de su carga. Así no tiene que registrar desde cero la asignación del docente que llega.
+
+Usted elige qué se traslada: puede pasar toda la carga o solo algunas asignaturas y algunas direcciones de grupo. Lo que no marque sigue con el docente que sale.
+
+El traslado tiene en cuenta el **tipo de asignación** de cada grupo:
+
+- **Estándar:** la asignatura tiene el mismo docente en todos los periodos. Se traslada con sus horas semanales, horas dictadas, créditos y peso.
+- **Personalizada:** la asignación puede cambiar de un periodo a otro y de un estudiante a otro. Cada asignatura aparece una vez por periodo, y usted elige qué periodos trasladar. Los estudiantes asignados se conservan. Consulte [Tipo de asignación y director de grupo](/docs/administrativo/gestion-de-personal/asignacion-academica/tipo-de-asignacion).
+
+El traslado aplica al **calendario** con el que inició sesión, que aparece en la parte superior de la pantalla.
+
+La pantalla se organiza así:
+
+- **Docente que sale** y **Docente que llega**, cada uno con un resumen de su carga.
+- **1. Asignaturas a trasladar**, agrupadas por grupo.
+- **2. Direcciones de grupo a trasladar**.
+- **3. Opciones**, para las tareas en línea y el estado del docente que sale.
+- Una barra inferior que resume el traslado, con el botón **Trasladar**.
+
+Ingrese a **Personal → Trasladar Asignación**.
+
+<GuideImagePending>
+  **Vista requerida:** pantalla **Trasladar asignación académica** con un docente que sale y un docente que llega seleccionados. Deben verse los dos recuadros de docentes con sus resúmenes, la tabla **1. Asignaturas a trasladar** con un grupo **Estándar** y uno **Personalizada**, la sección **2. Direcciones de grupo a trasladar** y la barra inferior con el botón **Trasladar**. Sirve para reconocer la organización de la pantalla antes de empezar. Archivo sugerido: `trasladar-asignacion-pantalla.jpg`. Use docentes de prueba o difumine los nombres reales.
+</GuideImagePending>
+
+<GuideCallout>
+  **Permiso.** Para trasladar se necesita el permiso **407** de asignación académica. El rector siempre puede hacerlo. Si falta el permiso, SINAI muestra *No tiene asignado el permiso Nº407* al confirmar.
+</GuideCallout>
+
+#### 2. Elegir el docente que sale y el que llega
+
+Antes de empezar, el docente que llega debe estar registrado como funcionario **activo** con cargo docente. Consulte [Registro de Funcionarios](/docs/administrativo/gestion-de-personal/funcionarios).
+
+<GuideDataTable>
+
+| Lista | Qué muestra |
+| --- | --- |
+| **Docente que sale** | Todos los docentes de la institución, en cualquier estado. Si un docente no está activo, su estado aparece al final del nombre, por ejemplo *- INACTIVO*. |
+| **Docente que llega** | Solo docentes activos. No incluye al docente que sale. |
+
+</GuideDataTable>
+
+1. En **Docente que sale**, escriba parte del nombre o búsquelo en la lista y selecciónelo.
+2. En **Docente que llega**, seleccione el docente que recibirá la carga.
+
+Al elegir cada docente, SINAI muestra un resumen debajo de su nombre:
+
+- **Docente que sale:** su estado (**Activo** u otro), el número de asignaturas de la asignación estándar con sus horas semanales, las **asignaturas por periodo** si tiene asignación personalizada, y los grupos que dirige.
+- **Docente que llega:** lo mismo, y además su **Carga semanal**. A medida que usted marca asignaturas, la barra muestra la carga que tendrá con el traslado. La carga semanal solo suma la asignación estándar, porque en la personalizada las horas cambian de un periodo a otro. El enlace **Ver su asignación actual** despliega las asignaturas que ya tiene.
+
+<GuideCallout>
+  Si cambia el **Docente que sale**, SINAI vuelve a marcar todas sus asignaturas y direcciones. Si solo cambia el **Docente que llega**, conserva las filas que usted había desmarcado.
+</GuideCallout>
+
+#### 3. Marcar las asignaturas a trasladar
+
+La tabla **1. Asignaturas a trasladar** agrupa la carga del docente que sale por grupo. Cada grupo muestra su sede, su jornada, el número de asignaturas y su tipo de asignación, **Estándar** o **Personalizada**.
+
+- En un grupo **Estándar**, cada fila es una asignatura con sus horas semanales en la columna **H.Sem**.
+- En un grupo **Personalizada**, cada fila es una asignatura en un periodo, con el nombre del periodo junto a la asignatura. El grupo no suma horas y muestra *—*.
+
+Al elegir los docentes, todas las filas vienen marcadas, salvo las que el docente que llega ya tiene. Solo se trasladan las filas marcadas.
+
+1. Desmarque las asignaturas que deben seguir con el docente que sale.
+2. Para marcar o desmarcar un grupo completo, use la casilla de la fila del grupo. Para marcar o desmarcar todo, use la casilla del encabezado.
+3. Revise la fila **MARCADAS** al final de la tabla: muestra las horas semanales y el número de asignaturas marcadas.
+
+Para ver solo los grupos, use la flecha del encabezado. La flecha de cada grupo oculta o muestra sus asignaturas.
+
+<GuideCallout type="warning">
+  **Asignaturas que el docente que llega ya tiene.** En los grupos estándar, si el docente que llega ya tiene la misma asignatura en el grupo, la fila aparece con la etiqueta **Ya la tiene el destino** y queda sin marcar. Arriba de la tabla, SINAI indica cuáles son. Si la marca, SINAI quita la asignatura del docente que sale y el docente que llega conserva la suya, con sus propias horas.
+</GuideCallout>
+
+<GuideCallout>
+  En los grupos personalizados, al trasladar una asignatura de un periodo se conservan sus estudiantes asignados, y las horas dictadas de ese periodo quedan en blanco para que las registre el docente que llega. Varios docentes pueden tener la misma asignatura en el mismo periodo, por eso estas filas no se marcan como conflicto.
+</GuideCallout>
+
+<GuideImagePending>
+  **Vista requerida:** tabla **1. Asignaturas a trasladar** con un grupo **Estándar** y un grupo **Personalizada** desplegados. Debe verse en el grupo personalizado el nombre del periodo junto a cada asignatura, una fila con la etiqueta **Ya la tiene el destino** sin marcar y la fila **MARCADAS**. Sirve para distinguir las filas de cada tipo de asignación. Archivo sugerido: `trasladar-asignacion-asignaturas.jpg`. Use docentes de prueba o difumine los nombres reales.
+</GuideImagePending>
+
+#### 4. Marcar las direcciones de grupo
+
+La sección **2. Direcciones de grupo a trasladar** lista los grupos que dirige el docente que sale, con su sede y jornada. Todos vienen marcados.
+
+1. Desmarque los grupos cuya dirección debe seguir con el docente que sale.
+2. Para marcar o desmarcar todos, use la casilla del encabezado.
+
+Si el docente que llega ya dirige otros grupos, SINAI lo indica arriba de la tabla. Un docente puede dirigir más de un grupo, así que esto no impide el traslado.
+
+Puede trasladar solo direcciones de grupo, sin ninguna asignatura marcada.
+
+#### 5. Definir las opciones del traslado
+
+En **3. Opciones**:
+
+- **Pasar las tareas en línea al docente que llega:** viene marcada. El docente que llega queda como autor de las tareas en línea que creó el docente que sale.
+- **Docente que sale:** si está activo, elija **Sigue activo** (opción predeterminada, por ejemplo cuando solo reparte parte de su carga) o **Inactivarlo**. Si ya no está activo, SINAI indica su estado actual y aclara que no cambia.
+
+<GuideCallout type="warning">
+  Con **Inactivarlo**, el docente que sale deja de aparecer en las listas de docentes activos y su usuario queda inactivo en la institución, de modo que ya no puede ingresar a ella. Para volver a activarlo, cambie su estado en [Registro de Funcionarios](/docs/administrativo/gestion-de-personal/funcionarios) y en la gestión de usuarios.
+</GuideCallout>
+
+#### 6. Confirmar el traslado
+
+La barra inferior resume lo que se va a trasladar, por ejemplo cuántas asignaturas con sus horas semanales, cuántas asignaturas por periodo y cuántas direcciones de grupo pasarán de un docente al otro. El botón **Trasladar** se activa cuando hay dos docentes elegidos y al menos una asignatura o dirección marcada. Mientras tanto, la barra indica qué falta.
+
+1. Revise el resumen de la barra.
+2. Haga clic en **Trasladar**.
+3. En **Confirmar traslado**, revise el detalle por grupo de las asignaturas de la asignación estándar, las asignaturas por periodo de la asignación personalizada, las direcciones de grupo, las tareas en línea y el estado del docente que sale. Si quedaron asignaturas sin marcar, la ventana indica cuántas siguen con el docente que sale.
+4. Haga clic en **Sí, trasladar**. Para revisar algo antes, haga clic en **Cancelar**.
+
+SINAI guarda todo el traslado de una vez y muestra un mensaje como *Se trasladaron 5 asignaturas, 3 asignaturas por periodo y 1 dirección de grupo de [docente que sale] a [docente que llega].* Si eligió **Inactivarlo**, el mensaje agrega que el docente que sale quedó inactivo. Después, la pantalla se actualiza con la carga que le queda al docente que sale y la nueva carga del docente que llega.
+
+<GuideImagePending>
+  **Vista requerida:** ventana **Confirmar traslado** abierta. Deben verse los nombres de los dos docentes, la lista con las asignaturas de la asignación estándar, las asignaturas por periodo, las direcciones de grupo y los botones **Cancelar** y **Sí, trasladar**. Sirve para que el usuario sepa qué revisar antes de confirmar. Archivo sugerido: `trasladar-asignacion-confirmar.jpg`. Use docentes de prueba o difumine los nombres reales.
+</GuideImagePending>
+
+<GuideCallout type="warning">
+  El traslado no se puede deshacer desde esta pantalla. Para revertirlo, haga otro traslado en sentido contrario. Las horas dictadas que se dejaron en blanco en la asignación personalizada no se recuperan, y si inactivó al docente que sale debe activarlo de nuevo.
+</GuideCallout>
+
+#### 7. Verificar el traslado
+
+1. Revise el resumen del **Docente que llega**: debe mostrar las asignaturas y las direcciones trasladadas. Use **Ver su asignación actual** para ver el detalle.
+2. Para la asignación estándar, abra **Personal → Asignación Académica → Asignación estándar → Por docente** y seleccione al docente que llega para ver su carga con horas y pesos.
+3. Para la asignación personalizada, revise el grupo en **Asignación Académica → Asignación personalizada → Por periodo**. Consulte [Asignación personalizada](/docs/administrativo/gestion-de-personal/asignacion-academica/asignacion-personalizada).
+
+## Preguntas frecuentes
+
+<GuideFAQ>
+  <GuideFAQItem index="01" question="¿Por qué el docente que llega no aparece en la lista?">
+    La lista **Docente que llega** solo muestra docentes activos de la institución y excluye al docente que sale. Revise en [Registro de Funcionarios](/docs/administrativo/gestion-de-personal/funcionarios) que el docente esté registrado, con cargo docente y en estado activo.
+  </GuideFAQItem>
+
+  <GuideFAQItem index="02" question="¿Por qué una asignatura aparece varias veces en el mismo grupo?">
+    Porque el grupo tiene asignación **Personalizada**. En esos grupos cada fila es una asignatura en un periodo. Marque solo los periodos que deben pasar al docente que llega; por ejemplo, desde el periodo en que empieza a dictar la clase.
+  </GuideFAQItem>
+
+  <GuideFAQItem index="03" question="¿Por qué una asignatura viene sin marcar?">
+    Porque el docente que llega ya tiene esa asignatura en el grupo, en la asignación estándar. La fila muestra **Ya la tiene el destino**. Si la marca, se quita del docente que sale y el docente que llega conserva su propia asignación.
+  </GuideFAQItem>
+
+  <GuideFAQItem index="04" question="¿Se pierden los estudiantes asignados en la asignación personalizada?">
+    No. La asignatura de ese periodo solo cambia de docente y conserva sus estudiantes. Lo que se deja en blanco son las horas dictadas, que corresponden al docente que sale.
+  </GuideFAQItem>
+
+  <GuideFAQItem index="05" question="¿Puedo trasladar solo la dirección de grupo?">
+    Sí. Desmarque todas las asignaturas, deje marcadas las direcciones de grupo que desea trasladar y haga clic en **Trasladar**.
+  </GuideFAQItem>
+
+  <GuideFAQItem index="06" question="¿Por qué no aparecen las opciones Sigue activo e Inactivarlo?">
+    Solo aparecen cuando el docente que sale está activo. Si ya está inactivo, trasladado o retirado, SINAI muestra su estado y el traslado no lo cambia.
+  </GuideFAQItem>
+
+  <GuideFAQItem index="07" question="SINAI indica que no se trasladó nada. ¿Qué pasó?">
+    El mensaje *No se trasladó nada: las asignaturas y direcciones marcadas ya no son del docente que sale.* aparece cuando otro usuario cambió esa asignación mientras usted tenía la pantalla abierta. Seleccione de nuevo el docente que sale para ver su carga actual.
+  </GuideFAQItem>
+
+  <GuideFAQItem index="08" question="El mensaje dice que las tareas en línea no se pudieron reasignar. ¿Se hizo el traslado?">
+    Sí. Las asignaturas, las direcciones de grupo y el estado del docente se guardaron. Solo falló el cambio de autor de las tareas en línea. Lo mismo ocurre si el mensaje indica que no se pudo inactivar el usuario: en ese caso, inactívelo desde la gestión de usuarios.
+  </GuideFAQItem>
+</GuideFAQ>

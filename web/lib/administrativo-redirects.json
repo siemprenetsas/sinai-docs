@@ -48,5 +48,10 @@
     "source": "/docs/administrativo/gestion-de-estudiantes/seguimiento-a-estudiantes/anotaciones-internas",
     "destination": "/docs/administrativo/convivencia-escolar/registro-de-anotaciones-disciplinarias",
     "permanent": true
+  },
+  {
+    "source": "/docs/administrativo/gestion-de-personal/asignacion-academica/asignacion-por-estudiante",
+    "destination": "/docs/administrativo/gestion-de-personal/asignacion-academica/trasladar-asignacion",
+    "permanent": true
   }
 ]
