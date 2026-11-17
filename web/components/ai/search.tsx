@@ -318,7 +318,7 @@ function Message({
   }
 
   return (
-    <div onClick={(e) => e.stopPropagation()} {...props}>
+    <div onClick={(e) => e.stopPropagation()} data-role={message.role} {...props}>
       <p
         className={cn(
           'mb-1 text-sm font-medium text-fd-muted-foreground',
@@ -552,11 +552,11 @@ export function AISearchEmbedPanel({ contextLocation }: { contextLocation?: stri
   }, []);
 
   return (
-    <div className="fixed inset-0 bg-fd-card text-fd-card-foreground">
+    <div className="sinai-embed-chat fixed inset-0 bg-fd-card text-fd-card-foreground">
       <div className="flex flex-col size-full p-2 lg:p-3">
-        <AISearchPanelHeader onClose={closeEmbedInParent} />
+        <AISearchPanelHeader className="sinai-embed-chat-header" onClose={closeEmbedInParent} />
         <AISearchPanelList className="flex-1" />
-        <div className="rounded-xl border bg-fd-secondary text-fd-secondary-foreground shadow-sm has-focus-visible:shadow-md">
+        <div className="sinai-embed-chat-input rounded-xl border bg-fd-secondary text-fd-secondary-foreground shadow-sm has-focus-visible:shadow-md">
           <AISearchInput contextLocation={contextLocation} />
           <div className="flex items-center gap-1.5 p-1 empty:hidden">
             <AISearchInputActions />

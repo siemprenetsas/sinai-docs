@@ -6678,3 +6678,103 @@ body:has(.sinai-custom-toc) #nd-toc {
     transition: none;
   }
 }
+
+/* Chat embebido (/embed/chat): se usa en la landing y en todos los masters de
+   WEBSINAI, así que tiene un único tema con la identidad SINAI (la misma de la
+   barra lateral del login WebForms y de la landing):
+   - azul SINAI #0f619f con velo violeta en el encabezado,
+   - franja verde #1dc958 como las tarjetas,
+   - fondo azul hielo #ebf6fd con tarjetas blancas,
+   - acción principal en cian #1cbaef como el botón "Entrar".
+   No cambia por rol ni con el modo oscuro. */
+.sinai-embed-chat,
+.dark .sinai-embed-chat {
+  color-scheme: light;
+  --color-fd-primary: #0f619f;
+  --color-fd-primary-foreground: #ffffff;
+  --color-fd-ring: #1cbaef;
+  --color-fd-background: #ebf6fd;
+  --color-fd-foreground: #1f3a5f;
+  --color-fd-card: #ebf6fd;
+  --color-fd-card-foreground: #1f3a5f;
+  --color-fd-popover: #ffffff;
+  --color-fd-popover-foreground: #1f3a5f;
+  --color-fd-secondary: #ffffff;
+  --color-fd-secondary-foreground: #1f3a5f;
+  --color-fd-muted: #d7e8f2;
+  --color-fd-muted-foreground: #556691;
+  --color-fd-accent: #d7e8f2;
+  --color-fd-accent-foreground: #0f619f;
+  --color-fd-border: #c5d8e4;
+}
+
+/* Encabezado: mismo degradado de la barra lateral de SINAI y franja verde. */
+.sinai-embed-chat .sinai-embed-chat-header {
+  border: 0;
+  border-bottom: 4px solid #1dc958;
+  background: linear-gradient(270deg, rgba(178, 45, 226, 0.3), transparent) #0f619f;
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(15, 97, 159, 0.25);
+}
+
+.sinai-embed-chat .sinai-embed-chat-header .text-fd-muted-foreground {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.sinai-embed-chat .sinai-embed-chat-header button:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+}
+
+/* Caja de pregunta y botón de enviar (cian como "Entrar"). */
+.sinai-embed-chat .sinai-embed-chat-input:focus-within {
+  border-color: #1cbaef;
+}
+
+.sinai-embed-chat form button[type="submit"] {
+  background-color: #1cbaef;
+  color: #ffffff;
+}
+
+.sinai-embed-chat form button[type="submit"]:not(:disabled):hover {
+  background-color: #0b9ed0;
+}
+
+/* Mensajes en burbujas para diferenciar quién habla. */
+.sinai-embed-chat [data-role="user"],
+.sinai-embed-chat [data-role="assistant"] {
+  padding: 0.6rem 0.9rem;
+  border-radius: 1rem;
+  overflow-wrap: anywhere;
+}
+
+/* Usuario: a la derecha, azul SINAI. */
+.sinai-embed-chat [data-role="user"] {
+  align-self: flex-end;
+  max-width: 85%;
+  border-bottom-right-radius: 0.3rem;
+  background: #0f619f;
+  box-shadow: 0 2px 8px rgba(15, 97, 159, 0.2);
+  --color-fd-foreground: #ffffff;
+  --color-fd-muted-foreground: rgba(255, 255, 255, 0.8);
+  --color-fd-primary: #ffffff;
+  color: #ffffff;
+}
+
+/* SINAI: a la izquierda, tarjeta blanca con borde del tema. */
+.sinai-embed-chat [data-role="assistant"] {
+  align-self: flex-start;
+  max-width: 92%;
+  border: 1px solid #c5d8e4;
+  border-bottom-left-radius: 0.3rem;
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(15, 97, 159, 0.08);
+}
+
+.sinai-embed-chat [data-role] .prose > :first-child {
+  margin-top: 0;
+}
+
+.sinai-embed-chat [data-role] .prose > :last-child {
+  margin-bottom: 0;
+}
