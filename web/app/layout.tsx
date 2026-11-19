@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import { Geist, Geist_Mono } from "next/font/google";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { RootProvider } from "fumadocs-ui/provider/next";
 import { SinaiSearchDialog } from "@/components/sinai-search-dialog";
 import { SinaiAssistant } from "@/components/sinai-assistant";
@@ -89,6 +90,7 @@ export default function RootLayout({
         >
           <SinaiAssistant>{children}</SinaiAssistant>
         </RootProvider>
+        <SpeedInsights />
       </body>
     </html>
   );
