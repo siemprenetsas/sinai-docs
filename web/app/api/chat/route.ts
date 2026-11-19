@@ -4,10 +4,9 @@ import {
   createUIMessageStreamResponse,
   gateway,
   generateObject,
+  generateText,
   stepCountIs,
-  streamText,
   tool,
-  toUIMessageStream,
 } from 'ai';
 import { z } from 'zod';
 import {
@@ -94,7 +93,63 @@ export async function POST(req: Request) {
     return createStaticAssistantResponse(unavailableMessage, messages);
   }
 
-  const result = streamText({
+  try {
+    const modelMessages = await convertToModelMessages<ChatUIMessage>(messages, {
+      convertDataPart(part) {
+        if (part.type === 'data-client') {
+          return {
+            type: 'text',
+            text: `[Client Context: ${JSON.stringify(part.data)}]`,
+          };
+        }
+      },
+    });
+    const instructions = getResponseInstructions(activeRole, activeLocation);
+    let answer = await generateSinaiResponse(modelMessages, instructions, activeRole);
+
+    // La respuesta se retiene hasta verificar que no solicite el perfil.
+    // Así el modelo no puede volver a mostrar una pregunta por rol al usuario.
+    if (asksForRole(answer)) {
+      console.warn('[api/chat] Se descartó una respuesta que solicitaba el rol.');
+      answer = await generateSinaiResponse(
+        modelMessages,
+        `${instructions}\nLa respuesta anterior fue inválida porque pidió el rol. Responde ahora la consulta de forma directa con la guía general, sin formular ninguna pregunta sobre perfil, rol o tipo de usuario.`,
+        activeRole,
+      );
+    }
+
+    if (asksForRole(answer)) {
+      answer = await getGeneralProcessFallback(latestUserText, activeRole);
+    }
+
+    return createStaticAssistantResponse(answer, messages);
+  } catch (error) {
+    console.error('[api/chat] Error al generar la respuesta:', error);
+    return createStaticAssistantResponse(unavailableMessage, messages);
+  }
+}
+
+function getResponseInstructions(
+  activeRole: ActiveRole | null,
+  activeLocation: string | null,
+): string {
+  return [
+    systemPrompt,
+    activeLocation
+      ? `La página desde la que consulta el usuario es ${activeLocation}. Usa esta ruta para inferir el módulo o proceso de SINAI y adaptar la respuesta; no le preguntes en qué módulo está.`
+      : '',
+    activeRole
+      ? `El contexto disponible corresponde a ${activeRole}. No menciones este dato ni solicites confirmarlo. Prioriza las guías generales cuando describan el proceso y usa las de ${activeRole} solo para detalles que no estén en las generales. Cita las URL usadas.`
+      : 'No hay un perfil explícito. Busca primero guías generales y responde el proceso común de inmediato. No pidas el perfil bajo ninguna circunstancia.',
+  ].join('\n');
+}
+
+async function generateSinaiResponse(
+  messages: Awaited<ReturnType<typeof convertToModelMessages<ChatUIMessage>>>,
+  instructions: string,
+  activeRole: ActiveRole | null,
+): Promise<string> {
+  const result = await generateText({
     model: gateway(modelId),
     providerOptions: {
       gateway: {
@@ -102,42 +157,62 @@ export async function POST(req: Request) {
         ...(fallbackModels.length > 0 && { models: fallbackModels }),
       },
     },
-    instructions: [
-      systemPrompt,
-      activeLocation
-        ? `La página desde la que consulta el usuario es ${activeLocation}. Usa esta ruta para inferir el módulo o proceso de SINAI y adaptar la respuesta; no le preguntes en qué módulo está.`
-        : '',
-      activeRole
-        ? `El contexto disponible corresponde a ${activeRole}. No menciones este dato ni solicites confirmarlo. Prioriza las guías generales cuando describan el proceso y usa las de ${activeRole} solo para detalles que no estén en las generales. Cita las URL usadas.`
-        : 'No hay un perfil explícito. Busca primero guías generales y responde el proceso común de inmediato. No pidas el perfil bajo ninguna circunstancia.',
-    ].join('\n'),
+    instructions,
     stopWhen: stepCountIs(5),
     maxOutputTokens: 2500,
     tools: {
       search: createSearchTool(activeRole),
     },
-    messages: await convertToModelMessages<ChatUIMessage>(messages, {
-      convertDataPart(part) {
-        if (part.type === 'data-client')
-          return {
-            type: 'text',
-            text: `[Client Context: ${JSON.stringify(part.data)}]`,
-          };
-      },
-    }),
+    messages,
     toolChoice: 'auto',
   });
 
-  return createUIMessageStreamResponse({
-    stream: toUIMessageStream({
-      stream: result.stream,
-      // El detalle queda en el log del servidor; al usuario no se le exponen datos internos.
-      onError(error) {
-        console.error('[api/chat] Error al generar la respuesta:', error);
-        return unavailableMessage;
-      },
-    }),
+  return result.text.trim();
+}
+
+function asksForRole(answer: string): boolean {
+  const normalized = answer
+    .normalize('NFD')
+    .replace(/\p{M}/gu, '')
+    .toLowerCase();
+  const refersToProfile = /\b(administrativ[oa]|docente|estudiante|perfil|rol|tipo de usuario)\b/.test(
+    normalized,
+  );
+  const requestsInformation = /\?|necesito saber|indica(?:me)?|dime|confirma|especifica|selecciona|consultas? como|cual es tu (?:rol|perfil)|que (?:rol|perfil)/.test(
+    normalized,
+  );
+
+  return refersToProfile && requestsInformation;
+}
+
+async function getGeneralProcessFallback(
+  latestUserText: string,
+  activeRole: ActiveRole | null,
+): Promise<string> {
+  if (/\bgoogle\b/i.test(latestUserText)) {
+    return [
+      'Para iniciar sesión con Google, la cuenta debe estar vinculada previamente a su usuario de SINAI.',
+      '',
+      '1. Ingrese con su **Usuario** y **Contraseña** de SINAI.',
+      '2. Abra su **Perfil** y, en **Cuenta de Google**, seleccione **Vincular cuenta Google**.',
+      '3. Luego vuelva a la página de inicio y elija **Iniciar con Google**.',
+      '',
+      'Si la cuenta ya está vinculada y el acceso continúa fallando, contacte al soporte de SINAI.',
+      '',
+      'Fuente: [¿Cómo ingresar a SINAI?](/docs/generales/como-ingresar-a-sinai)',
+    ].join('\n');
+  }
+
+  const { guides } = await retrieveGuidesForChat({
+    query: latestUserText,
+    activeRole,
+    limit: 1,
   });
+  const guide = guides[0];
+
+  return guide
+    ? `Consulte el procedimiento en [${guide.title}](${guide.url}).`
+    : 'No encontré una guía disponible para este proceso. Comuníquese con el soporte de SINAI.';
 }
 
 async function classifyRequestScope(
