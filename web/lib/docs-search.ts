@@ -101,7 +101,12 @@ export async function retrieveGuidesForChat(options: {
     if (best <= 0) continue;
 
     const role = getRoleFromPath(page.url);
-    if (activeRole && role === activeRole) best += 45;
+    const isGeneralGuide = page.url.startsWith('/docs/generales/');
+
+    // Las guías generales describen procesos compartidos por todos los perfiles.
+    // Deben aparecer antes que las versiones por rol cuando ambas responden la misma consulta.
+    if (isGeneralGuide) best += 70;
+    else if (activeRole && role === activeRole) best += 45;
     else if (!role) best += 25;
 
     scores.set(page.url, (scores.get(page.url) ?? 0) + best);
@@ -139,8 +144,10 @@ export async function retrieveGuidesForChat(options: {
     if (result.type === 'text') score += 5;
 
     const role = getRoleFromPath(pageUrl);
-    if (activeRole && role === activeRole) score += 20;
-    if (!role) score += 10;
+    const isGeneralGuide = pageUrl.startsWith('/docs/generales/');
+    if (isGeneralGuide) score += 30;
+    else if (activeRole && role === activeRole) score += 20;
+    else if (!role) score += 10;
 
     const content = normalizeSearchQuery(String(result.content ?? ''));
     for (const searchQuery of oramaQueries) {
