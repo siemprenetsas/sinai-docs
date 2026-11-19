@@ -44,8 +44,15 @@ export function AISearchPanelHeader({
   className,
   nativeControlId,
   onClose,
+  title = 'Asistente SINAI',
+  description = 'Las respuestas se basan en las guías disponibles. Verifique los datos importantes.',
   ...props
-}: ComponentProps<'div'> & { nativeControlId?: string; onClose?: () => void }) {
+}: Omit<ComponentProps<'div'>, 'title'> & {
+  nativeControlId?: string;
+  onClose?: () => void;
+  title?: ReactNode;
+  description?: ReactNode;
+}) {
   const { setOpen } = useAISearchContext();
 
   return (
@@ -57,10 +64,8 @@ export function AISearchPanelHeader({
       {...props}
     >
       <div className="px-3 py-2 flex-1">
-        <p className="text-sm font-medium mb-2">Asistente SINAI</p>
-        <p className="text-xs text-fd-muted-foreground">
-          Las respuestas se basan en las guías disponibles. Verifique los datos importantes.
-        </p>
+        <p className="text-sm font-medium mb-2">{title}</p>
+        <p className="text-xs text-fd-muted-foreground">{description}</p>
       </div>
 
       {nativeControlId ? (
@@ -554,7 +559,25 @@ export function AISearchEmbedPanel({ contextLocation }: { contextLocation?: stri
   return (
     <div className="sinai-embed-chat fixed inset-0 bg-fd-card text-fd-card-foreground">
       <div className="flex flex-col size-full p-2 lg:p-3">
-        <AISearchPanelHeader className="sinai-embed-chat-header" onClose={closeEmbedInParent} />
+        <AISearchPanelHeader
+          className="sinai-embed-chat-header"
+          onClose={closeEmbedInParent}
+          title="Asistente Virtual de SINAI"
+          description={
+            <>
+              Pregúntale a SINAI cualquier duda que tengas. Te responderá con base a la
+              documentación disponible en{' '}
+              <a
+                href="https://ayuda.sinai.net.co"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium underline underline-offset-2"
+              >
+                ayuda.sinai.net.co
+              </a>
+            </>
+          }
+        />
         <AISearchPanelList className="flex-1" />
         <div className="sinai-embed-chat-input rounded-xl border bg-fd-secondary text-fd-secondary-foreground shadow-sm has-focus-visible:shadow-md">
           <AISearchInput contextLocation={contextLocation} />
