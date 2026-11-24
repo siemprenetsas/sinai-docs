@@ -20,7 +20,7 @@ type ActiveRole = DocsRole;
 
 // Vercel AI Gateway: en Vercel autentica con OIDC automáticamente;
 // en local usa AI_GATEWAY_API_KEY.
-const modelId = process.env.AI_GATEWAY_MODEL ?? 'zai/glm-5.3-flashx';
+const modelId = process.env.AI_GATEWAY_MODEL ?? 'deepseek/deepseek-v4.1-flash-1017-ultrafast';
 const fallbackModels = (process.env.AI_GATEWAY_FALLBACK_MODELS ?? '')
   .split(',')
   .map((model) => model.trim())
