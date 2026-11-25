@@ -6741,6 +6741,8 @@ body:has(.sinai-custom-toc) #nd-toc {
 }
 
 /* Mensajes en burbujas para diferenciar quién habla. */
+.sinai-ai-panel [data-role="user"],
+.sinai-ai-panel [data-role="assistant"],
 .sinai-embed-chat [data-role="user"],
 .sinai-embed-chat [data-role="assistant"] {
   padding: 0.6rem 0.9rem;
@@ -6749,6 +6751,7 @@ body:has(.sinai-custom-toc) #nd-toc {
 }
 
 /* Usuario: a la derecha, azul SINAI. */
+.sinai-ai-panel [data-role="user"],
 .sinai-embed-chat [data-role="user"] {
   align-self: flex-end;
   max-width: 85%;
@@ -6762,6 +6765,7 @@ body:has(.sinai-custom-toc) #nd-toc {
 }
 
 /* SINAI: a la izquierda, tarjeta blanca con borde del tema. */
+.sinai-ai-panel [data-role="assistant"],
 .sinai-embed-chat [data-role="assistant"] {
   align-self: flex-start;
   max-width: 92%;
@@ -6771,10 +6775,38 @@ body:has(.sinai-custom-toc) #nd-toc {
   box-shadow: 0 2px 8px rgba(15, 97, 159, 0.08);
 }
 
+/* Mantiene legible la respuesta sobre la burbuja blanca, incluso en tema oscuro. */
+.sinai-ai-panel [data-role="assistant"] {
+  --color-fd-foreground: #1f3a5f;
+  --color-fd-muted-foreground: #556691;
+  --color-fd-primary: #0f619f;
+  color: #1f3a5f;
+}
+
+.sinai-ai-panel [data-role="assistant"] .prose {
+  --tw-prose-body: #365675;
+  --tw-prose-headings: #1f3a5f;
+  --tw-prose-lead: #365675;
+  --tw-prose-links: #0f619f;
+  --tw-prose-bold: #1f3a5f;
+  --tw-prose-counters: #556691;
+  --tw-prose-bullets: #8aa3b5;
+  --tw-prose-hr: #c5d8e4;
+  --tw-prose-quotes: #365675;
+  --tw-prose-quote-borders: #c5d8e4;
+  --tw-prose-captions: #556691;
+  --tw-prose-code: #1f3a5f;
+  --tw-prose-th-borders: #c5d8e4;
+  --tw-prose-td-borders: #dbe7ee;
+  color: #365675;
+}
+
+.sinai-ai-panel [data-role] .prose > :first-child,
 .sinai-embed-chat [data-role] .prose > :first-child {
   margin-top: 0;
 }
 
+.sinai-ai-panel [data-role] .prose > :last-child,
 .sinai-embed-chat [data-role] .prose > :last-child {
   margin-bottom: 0;
 }

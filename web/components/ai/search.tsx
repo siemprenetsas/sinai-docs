@@ -510,7 +510,7 @@ export function AISearchPanel({ nativeControlId }: { nativeControlId?: string })
       {actualOpen && (
         <div
           className={cn(
-            'overflow-hidden z-30 bg-fd-card text-fd-card-foreground [--ai-chat-width:400px] 2xl:[--ai-chat-width:460px]',
+            'sinai-ai-panel overflow-hidden z-30 bg-fd-card text-fd-card-foreground [--ai-chat-width:400px] 2xl:[--ai-chat-width:460px]',
             'fixed inset-y-4 inset-e-4 [z-index:70] max-lg:inset-x-2 border rounded-2xl shadow-xl lg:w-(--ai-chat-width)',
             open
               ? 'animate-fd-dialog-in lg:animate-[ask-ai-open_200ms]'
