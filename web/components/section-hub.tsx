@@ -66,6 +66,7 @@ type HubConfig = {
   subtitle: string;
   description: string;
   cards: HubCard[];
+  featuredLink?: { title: string; description: string; href: string };
   extraSections?: { title: string; cards: HubCard[] }[];
 };
 
@@ -243,6 +244,11 @@ const HUBS: Record<string, HubConfig> = {
       card('Foliar libro', 'Asigne grupos al libro y numere los folios.', '/docs/administrativo/cierre-anual/foliar-libro', images.adminClosing, 'Libro de calificaciones foliado', BookOpen),
       card('Informes de promoción', 'Consulte los informes asociados a la promoción.', '/docs/administrativo/cierre-anual/informes', images.adminClosing, 'Reporte final de promoción académica', BarChart3),
     ],
+    featuredLink: {
+      title: 'Proceso de promoción final y cierre del calendario académico',
+      description: 'Consulte en orden los temas del cierre anual y abra directamente la guía de cada proceso.',
+      href: '/docs/administrativo/cierre-anual/proceso-de-promocion-final-y-cierre-del-calendario',
+    },
   },
   'administrativo/gestion-de-usuarios-y-permisos': {
     title: 'Gestión de usuarios y permisos',
@@ -717,6 +723,17 @@ export function SectionHub({ section }: { section: string }) {
           <div className="sinai-institutional-description">
             <p>{hub.description}</p>
           </div>
+          {hub.featuredLink && (
+            <Link className="sinai-section-featured-guide" href={hub.featuredLink.href}>
+              <span className="sinai-section-featured-guide-copy">
+                <strong>{hub.featuredLink.title}</strong>
+                <span>{hub.featuredLink.description}</span>
+              </span>
+              <span className="sinai-section-featured-guide-action">
+                Abrir guía <ArrowRight aria-hidden="true" />
+              </span>
+            </Link>
+          )}
         </div>
       </header>
 

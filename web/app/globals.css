@@ -2968,6 +2968,72 @@ html[data-sinai-role="administrativo"] #nd-sidebar-mobile button .sinai-role-ico
   text-wrap: pretty;
 }
 
+.sinai-section-featured-guide {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  margin-top: 1rem;
+  padding: 0.9rem 1.1rem;
+  border: 1px solid color-mix(in srgb, var(--sinai-role-accent) 24%, var(--color-fd-border));
+  border-radius: 0.8rem;
+  background: color-mix(in srgb, var(--sinai-role-accent) 5%, var(--color-fd-card));
+  color: var(--color-fd-foreground);
+  text-decoration: none;
+  transition: border-color 160ms ease, background-color 160ms ease, transform 160ms ease;
+}
+
+.sinai-section-featured-guide:hover {
+  border-color: color-mix(in srgb, var(--sinai-role-accent) 55%, var(--color-fd-border));
+  background: color-mix(in srgb, var(--sinai-role-accent) 8%, var(--color-fd-card));
+  color: var(--color-fd-foreground);
+  transform: translateY(-1px);
+}
+
+.sinai-section-featured-guide:focus-visible {
+  outline: 2px solid var(--sinai-role-accent);
+  outline-offset: 3px;
+}
+
+.sinai-section-featured-guide-copy {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.sinai-section-featured-guide-copy strong {
+  font-size: 0.95rem;
+  font-weight: 650;
+}
+
+.sinai-section-featured-guide-copy > span {
+  color: var(--color-fd-muted-foreground);
+  font-size: 0.84rem;
+  line-height: 1.45;
+}
+
+.sinai-section-featured-guide-action {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--sinai-role-accent);
+  font-size: 0.85rem;
+  font-weight: 650;
+}
+
+.sinai-section-featured-guide-action svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+@media (max-width: 640px) {
+  .sinai-section-featured-guide {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+}
+
 .sinai-institutional-introduction {
   display: block;
   max-width: 49rem;
