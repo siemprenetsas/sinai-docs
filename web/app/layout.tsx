@@ -5,6 +5,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { RootProvider } from "fumadocs-ui/provider/next";
 import { SinaiSearchDialog } from "@/components/sinai-search-dialog";
 import { SinaiAssistant } from "@/components/sinai-assistant";
+import { FumadocsNoPrefetchLink } from "@/components/no-prefetch-link";
 import { SINAI_FONT_SIZE_BOOTSTRAP } from "@/lib/sinai-font-size";
 import "./globals.css";
 
@@ -49,6 +50,9 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: SINAI_FONT_SIZE_BOOTSTRAP }}
         />
         <RootProvider
+          // Los enlaces de Fumadocs (menú lateral, pestañas, pie de página y
+          // enlaces de las guías) nunca precargan páginas.
+          components={{ Link: FumadocsNoPrefetchLink }}
           theme={{
             defaultTheme: "system",
             enableSystem: true,

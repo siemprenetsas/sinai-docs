@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import Image from 'next/image';
-import Link from 'next/link';
+import Link from '@/components/no-prefetch-link';
 import {
   Accessibility,
   AlertTriangle,

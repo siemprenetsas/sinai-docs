@@ -1,6 +1,6 @@
 'use client';
 
-import Link from 'next/link';
+import Link from '@/components/no-prefetch-link';
 import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 import { ArrowLeft } from 'lucide-react';

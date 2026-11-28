@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from '@/components/no-prefetch-link';
 import { ArrowRight, Compass } from 'lucide-react';
 import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/cn';

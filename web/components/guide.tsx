@@ -1,7 +1,7 @@
 'use client';
 
 import { Children, cloneElement, isValidElement, useId, useState, type ReactElement, type ReactNode } from 'react';
-import Link from 'next/link';
+import Link from '@/components/no-prefetch-link';
 import { usePathname } from 'next/navigation';
 import './guide-table.css';
 import { AlertTriangle, ArrowRight, CheckCircle2, ChevronDown, CircleHelp, Clock3, ExternalLink, ImageOff, Info, VideoOff } from 'lucide-react';

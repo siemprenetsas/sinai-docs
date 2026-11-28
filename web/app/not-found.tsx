@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from '@/components/no-prefetch-link';
 import { SinaiBrandLogo } from '@/components/sinai-brand-logo';
 import { SinaiNotFound } from '@/components/sinai-not-found';
 

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
+import Link from '@/components/no-prefetch-link';
 import { ArrowDown, ArrowLeft } from 'lucide-react';
 import { SinaiBrandLogo } from '@/components/sinai-brand-logo';
 import { SinaiFontSizeSwitch } from '@/components/sinai-font-size-switch';
